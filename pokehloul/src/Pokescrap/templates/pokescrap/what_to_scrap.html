@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>What to scrap ?</title>
+        <script type="text/javascript">
+            function refreshPage() {
+                window.location.reload();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>What to scrap ?</h1>
+        {% for scraping_element in scraping_list %}
+            {% if not scraping_element.is_scraped %}
+            <div>
+                <a href="{{ scraping_element.url }}" target="_blank">
+                    <h2>{{ scraping_element.name }} ({{ scraping_element.type_element }})</h2>
+                </a>
+                <form action="{{ request.path }}" method="POST" onsubmit="refreshPage()">
+                    {% csrf_token %}
+                    <input type="hidden" name="type_element" value="{{ scraping_element.type_element }}">
+                    <input type="hidden" name="url" value="{{ scraping_element.url }}">
+                    <button type="submit">Scrape Now</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </body>
+</html>

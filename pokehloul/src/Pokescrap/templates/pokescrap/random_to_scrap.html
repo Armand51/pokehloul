@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>What to scrap ?</title>
+        <script type="text/javascript">
+            function refreshPage() {
+                window.location.reload();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>What to scrap ?</h1>
+        <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+</head>
+<body>
+    <form action="/what-to-scrap/random" method="POST">
+        {% csrf_token %}
+        <!-- Selectlist pour les nombres entre 1 et 100 -->
+        <label for="numbers">Choisissez un nombre :</label>
+        <select id="numbers" name="n">
+            <!-- Génération des options -->
+            <script>
+                for (let i = 1; i <= 100; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+
+        <!-- Selectlist parmi "P", "T", et "A" -->
+        <label for="options">Choisissez une catégorie :</label>
+        <select id="options" name="categ">
+            <option value="P">P</option>
+            <option value="T">T</option>
+            <option value="A">A</option>
+        </select>
+
+        <!-- Bouton envoyer -->
+        <button type="submit">Envoyer</button>
+    </body>
+</html>
